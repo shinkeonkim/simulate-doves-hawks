@@ -37,7 +37,7 @@ class Game:
             if self.next():
                 ret[t] = copy.deepcopy(self.count)
             else:
-                endTurn = t
+                endTurn = t-1
                 break
         return {'ret': ret, 'endTurn' : endTurn}
 
