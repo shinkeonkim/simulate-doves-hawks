@@ -3,6 +3,10 @@ from game import Game
 from PyQt5.QtWidgets import * 
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 class Window(QWidget):
     def __init__(self):
@@ -16,9 +20,11 @@ class Window(QWidget):
         self.container = QHBoxLayout()
         self.setLayout(self.container)
         
+        self.fig = plt.Figure()
+        self.canvas = FigureCanvas(self.fig)
+
 
         self.input_container = QVBoxLayout()
-
         self.foods = QHBoxLayout()
         self.doves = QHBoxLayout()
         self.hawks = QHBoxLayout()
@@ -49,6 +55,7 @@ class Window(QWidget):
         self.input_container.addLayout(self.turn)
         
 
+        self.container.addWidget(self.canvas)
         self.container.addLayout(self.input_container)
 
         self.pushButton = QPushButton("simulate")
@@ -79,6 +86,38 @@ class Window(QWidget):
         turn = int(self.turn_edit.text())
         result = game.simulate(turn)
         print(result)
+        
+        x = np.arange(1, result['endTurn']+1, 1)
+
+        foods = []
+        doves = []
+        hawks = []
+
+        for i in range(1,result['endTurn']+1):
+            foods.append(result['ret'][i]['foods'] * 2)
+            doves.append(result['ret'][i]['doves'])
+        
+        for i in range(1,result['endTurn']+1):
+            hawks.append(result['ret'][i]['hawks'])
+
+
+        foods = np.array(foods)
+        doves = np.array(doves)
+        hawks = np.array(hawks)
+
+        self.fig.clear()
+        ax = self.fig.add_subplot(111)
+        ax.plot(x, foods, label="foods")
+        ax.plot(x, doves, label="doves")
+        ax.plot(x, hawks, label="hawks")
+        
+        ax.set_xlabel("turn")
+        ax.set_xlabel("count")
+        
+        ax.set_title("Doves & Hawks")
+        ax.legend()
+        
+        self.canvas.draw()
 
 
 if __name__ == "__main__":

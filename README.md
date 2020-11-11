@@ -9,3 +9,5 @@ In this Video, there are two strategy.
 Share strategy = Doves, Take strategy = Hawks.
 In this Repo, show the results of the simulation according to the values(foods count, Doves count, Hawks count) you set using PyQt5.
 ```
+
+<img src = "./img/ver.1.jpg">
