@@ -2,7 +2,7 @@
 
 ### First, Watch this video! 🎬
 
-[![Video Label](https://yt-embed.herokuapp.com/embed?v=YNMkADpvO4w)](https://www.youtube.com/watch?v=YNMkADpvO4w)
+[![Video Label](https://img.youtube.com/vi/YNMkADpvO4w/0.jpg)](https://www.youtube.com/watch?v=YNMkADpvO4w)
 
 ```
 In this Video, there are two strategy.
